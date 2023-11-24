@@ -7,14 +7,6 @@ function Search() {
     const searchQuery = useSelector((state) => state.imageReducer.searchQuery);
 
 
-    // const handleSearch = () => {
-
-    //     dispatch(fetchPhotos(searchQuery));
-    //     // // Dispatch setSearchQuery with the new search query or 'nature' if empty
-    //     // dispatch(setSearchQuery(newSearchQuery));
-    // }
-
-  // handling serach as per input 
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(fetchPhotos(searchQuery));

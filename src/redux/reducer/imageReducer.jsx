@@ -3,19 +3,24 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 
 
 export const fetchPhotos = createAsyncThunk("fetchPhotos", async (searchQuery, { getState }) => {
+  try {
+    // Simulate a delay of 2 seconds (you can adjust this value)
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
-  const response = await fetch(
-    `https://api.unsplash.com/search/photos?page=1&query=${searchQuery}&client_id=MQsHFMlOnvv3jMs-E0djEUGZ8Ie4CUNDz-dZab--eDc`
-  );
+    const response = await fetch(
+      `https://api.unsplash.com/search/photos?page=1&query=${searchQuery}&client_id=MQsHFMlOnvv3jMs-E0djEUGZ8Ie4CUNDz-dZab--eDc`
+    );
 
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    throw error;
   }
-
-  const data = await response.json();
-  return data.results;
 });
-
 
  
 

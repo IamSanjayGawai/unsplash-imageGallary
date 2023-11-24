@@ -8,6 +8,8 @@ import CustomModal from "../component/CustomModal";
 import Loader from "../component/Loader";
 
 
+
+
 function Home() {
   const dispatch = useDispatch();
   const { photos, isLoading, error, filteredPhotos } = useSelector((state) => state.imageReducer);
@@ -19,8 +21,10 @@ function Home() {
   // console.log('photos', photos);
 
   useEffect(() => {
-  
-      dispatch(fetchPhotos());
+  setTimeout(()=>{
+    dispatch(fetchPhotos());
+  }, 3000)
+      
    
   }, [dispatch]);
 
