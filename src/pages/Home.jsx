@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPhotos } from "../redux/reducer/imageReducer";
 import ImageCard from "../component/ImageCard";
 import CustomModal from "../component/CustomModal";
+import Loader from "../component/Loader";
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -14,9 +16,12 @@ function Home() {
   const [id, setId] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
 
-  console.log('photos', photos);
+  // console.log('photos', photos);
+
   useEffect(() => {
-    dispatch(fetchPhotos());
+  
+      dispatch(fetchPhotos());
+   
   }, [dispatch]);
 
   const toggleDarkMode = () => {
@@ -36,8 +41,10 @@ function Home() {
           setShowPopup={setShowPopup}
         />
       )}
-      {isLoading ? (
-        <h5 className="text-center">Loading...</h5>
+      {isLoading  ? (
+        <div className="d-flex justify-content-center align-items-center" style={{height:'50vh', width:'100vw'}}>
+       <Loader/>
+       </div>
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
@@ -49,7 +56,7 @@ function Home() {
           onClick={() => {
             setId(photo.id);
             setShowPopup(true);
-          }} key={photo.id} className="col-12 col-sm-12 col-lg-3 col-xl-3  rounded mb-4 ">
+          }} key={photo.id} className="col-12 col-sm-12 col-lg-3 col-xl-3  rounded mb-2" >
              <ImageCard
              key={photo.id}
              photo={photo}
