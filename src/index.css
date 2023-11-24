@@ -42,6 +42,19 @@
 
 
 
+/* CardSkeleton.css */
+@keyframes waveAnimation {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.wave-animation {
+  animation: waveAnimation 1.5s infinite;
+}
 
 
 
