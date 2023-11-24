@@ -7,19 +7,25 @@ function Search() {
     const searchQuery = useSelector((state) => state.imageReducer.searchQuery);
 
 
-    const handleSearch = () => {
+    // const handleSearch = () => {
 
-        dispatch(fetchPhotos(searchQuery));
-        // Dispatch setSearchQuery with the new search query or 'nature' if empty
-        dispatch(setSearchQuery(newSearchQuery));
+    //     dispatch(fetchPhotos(searchQuery));
+    //     // // Dispatch setSearchQuery with the new search query or 'nature' if empty
+    //     // dispatch(setSearchQuery(newSearchQuery));
+    // }
+
+  // handling serach as per input 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(fetchPhotos(searchQuery));
+    if(searchQuery === ''){
+        dispatch(fetchPhotos());
     }
 
-    const handleEnterSearch = (e) => {
-        e.preventDefault();
-        if (e.key === 'Enter') {
-            dispatch(fetchPhotos(searchQuery));
-        }
-    }
+
+  }
+
+
 
     return (
         <div className="container-fluid border bx-shadow" style={{
@@ -27,29 +33,26 @@ function Search() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             opacity: '1',
+            height:'10rem'
         }}
         >
             <div className="row">
                 <div className="col-12 d-flex justify-content-center align-items-center" style={{ height: '10rem' }}>
-                    <form className="d-flex">
-                        <input
-                            type="search"
-                            className="form-control "
-                            placeholder="Search"
-                            aria-label="Search"
-                            value={searchQuery}
-                            onChange={(e) => dispatch(setSearchQuery(e.target.value))}
-                            style={{ width: '15rem' }}
-                        />
-                        <button
-                            className="btn btn-success"
-                            type="button"
-                            onClick={handleSearch}
-                            onKeyDown={handleEnterSearch}
-                        >
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </form>
+                <form className="d-flex" onSubmit={handleSearch}>
+    <input
+        type="search"
+        className="form-control"
+        placeholder="Search"
+        aria-label="Search"
+        value={searchQuery}
+        onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+        style={{ width: '15rem' }}
+    />
+    <button className="btn btn-success" type="submit">
+        <i className="fa-solid fa-magnifying-glass"></i>
+    </button>
+</form>
+
                 </div>
             </div>
         </div>
